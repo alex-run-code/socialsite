@@ -8,4 +8,6 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('logout-then-login/', auth_views.logout_then_login, name='logout_then_login'),
     path('', views.dashboard, name='dashboard'),
+    path('password-change/', auth_views.PasswordChangeView.as_view(), name='password_change'),
+    path('password-change/done/', auth_views.PasswordChangeDoneView.as_view(), name='password_change_done'),
 ]
