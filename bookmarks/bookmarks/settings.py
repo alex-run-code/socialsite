@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -137,9 +138,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "account/static",
 ]
 
-LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
-LOGIN_URL = reverse_lazy('login')
-LOGOUT_URL = reverse_lazy('logout')
+# LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+# LOGIN_URL = reverse_lazy('login')
+# LOGOUT_URL = reverse_lazy('logout')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -148,15 +149,18 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
-    'allauth.account,auth_backend.AuthenticationBackEnd',
-    'allauth.socialaccount.providers.facebook',
+    'allauth.account.auth_backends.AuthenticationBackend',
 )
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 }
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = "/images/"

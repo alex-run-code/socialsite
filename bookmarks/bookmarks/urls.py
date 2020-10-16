@@ -25,6 +25,7 @@ urlpatterns = [
     path('images/', include('images.urls')),
     path('api_example/', include('api_example.urls')),
     path('accounts/', include('allauth.urls')),
+    path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,
